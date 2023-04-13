@@ -21,4 +21,4 @@ First, all the .CSV files were uploaded on Google Drive and using file URIs, the
       
       ```
 
-          # Results indicate that min(end_lat) and max(end_lng) have values of 0.0 which are not possible since Chicago's coordinates are 41.8781° N, 87.6298° W. This implies that all trips must happen within these coordinates. Therefore, rows where 'end_lat = 0.0' and 'end_lng = 0.0' shall be removed. Since BigQuery                 Sandbox does not support the DELETE statement, a table without these rows will be viewed and materialized. 
+          # Results indicate that min(end_lat) and max(end_lng) have values of 0.0 which are not possible since Chicago's coordinates are 41.8781° N, 87.6298° W. This implies that all trips must happen within these coordinates. Therefore, rows where 'end_lat = 0.0' and 'end_lng = 0.0' shall be removed. Since BigQuery Sandbox does not support the DELETE statement, a table without these rows will be viewed and materialized. 
