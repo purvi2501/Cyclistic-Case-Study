@@ -1,0 +1,24 @@
+After the initial data cleaning in Excel, I used BigQuery for further data cleaning. The following SQL queries highlight the same. 
+First, all the .CSV files were uploaded on Google Drive and using file URIs, the tables were uploaded in BigQuery under a dataset called ‘bike_share’. 
+
+## Checking for Outliers
+  
+  -	Latitude and longitude coordinates can show potential outliers. Chicago’s official coordinates are 41.8781° N, 87.6298° W. Therefore, all rides must take place         within these coordinates. 
+  
+  -	 A query was run to find out the maximum and minimum coordinate values for ‘start_lat,’ ‘start_lng’, ‘end_lat’, and ‘end_lng’.  
+  
+      ```bigquery
+      SELECT 
+            MIN(start_lat) AS min_start_lat, 
+            MAX(start_lat) AS max_start_lat, 
+            MIN(start_lng) AS min_start_lng, 
+            MAX(start_lng) AS max_start_lng, 
+            MIN(end_lat) AS min_end_lat, 
+            MAX(end_lat) AS max_end_lat, 
+            MIN(end_lng) AS min_end_lng, 
+            MAX(end_lng) AS max_end_lat
+      FROM `mydataproject64995.bike_share.cs1_consolidated_data`;
+      
+      ```
+
+          # Results indicate that min(end_lat) and max(end_lng) have values of 0.0 which are not possible since Chicago's coordinates are 41.8781° N, 87.6298° W. This implies that all trips must happen within these coordinates. Therefore, rows where 'end_lat = 0.0' and 'end_lng = 0.0' shall be removed. Since BigQuery                 Sandbox does not support the DELETE statement, a table without these rows will be viewed and materialized. 
