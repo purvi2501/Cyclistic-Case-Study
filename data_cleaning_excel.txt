@@ -4,22 +4,22 @@ The .CSV files were first opened in MS-Excel for initial data cleaning and prepa
 
 ## Checking for Duplicates
   
-  1.	Checking for duplicates: Each table was checked for duplicates. It was found that there were no duplicates in any table. This is likely because data has been         already anonymized. ‘ride_id’ is unique for each ride, irrespective of the user. 
+  1.	Checking for duplicates: Each table was checked for duplicates. It was found that there were no duplicates in any table. This is likely because data has been already anonymized. ‘ride_id’ is unique for each ride, irrespective of the user. 
 
 ## Sorting & Filtering
 
-  2.	Next, each file was formatted as a table for sorting and filtering. Then, the ‘started_at’ column was sorted by oldest to newest to show the first date of the       month at the top. 
+  2.	Next, each file was formatted as a table for sorting and filtering. Then, the ‘started_at’ column was sorted by oldest to newest to show the first date of the month at the top. 
 
 ## Data Manipulation
-  3.	Next, the ‘started_at’ and ‘ended_at’ columns were standardized by changing their format from ‘mm/dd/yyyy hh:mm’ to ‘yyyy-mm-dd hh:mm:ss.’ This was done to           extract accurate date and time data. 
+  3.	Next, the ‘started_at’ and ‘ended_at’ columns were standardized by changing their format from ‘mm/dd/yyyy hh:mm’ to ‘yyyy-mm-dd hh:mm:ss.’ This was done to extract accurate date and time data. 
 
-  4.	Eight columns were added after the ‘ended_at’ column, namely ‘start_date’, ‘end_date’, start_time’, ‘end_time, ride_length’, ‘num_of_days’,                           ‘start_day_of_week’, and ‘month’.
+  4.	Eight columns were added after the ‘ended_at’ column, namely ‘start_date’, ‘end_date’, start_time’, ‘end_time, ride_length’, ‘num_of_days’, ‘start_day_of_week’, and ‘month’.
     
         -	‘start_date’ and ‘end_date’  indicate each ride’s start and end dates in the format ‘yyyy-mm-dd’. 
     
-        -	Similarly, ‘start_time’ and ‘end_time’ indicate each ride’s start and end times in the format ‘hh:mm:ss’. These will help in the calculation of the                   duration of each ride (ride_length), which is the difference between start time and end time.
+        -	Similarly, ‘start_time’ and ‘end_time’ indicate each ride’s start and end times in the format ‘hh:mm:ss’. These will help in the calculation of the duration of each ride (ride_length), which is the difference between start time and end time.
 
-        -	‘num_of_days’ refers to the difference between the start and end dates. Ideally, this should be 0 or 1. Numbers above 1 may amount to false records due the            pricing plan structure. The plan has three types, single-ride passes, full-day passes and annual memberships, details of which are not known. However, it            would be safe to assume that these plans have a certain time limit per ride and additional charges per minute may be applicable after the allotted ride              time is over. Therefore, the ‘num_of_days’ should ideally be either 0 or 1. 
+        -	‘num_of_days’ refers to the difference between the start and end dates. Ideally, this should be 0 or 1. Numbers above 1 may amount to false records due the pricing plan structure. The plan has three types, single-ride passes, full-day passes and annual memberships, details of which are not known. However, it            would be safe to assume that these plans have a certain time limit per ride and additional charges per minute may be applicable after the allotted ride              time is over. Therefore, the ‘num_of_days’ should ideally be either 0 or 1. 
 
         -	‘start_day_of_week’ refers to the numeric day of the week, where 1 = ‘Sunday’ and 7 = ‘Saturday’.
 
@@ -31,15 +31,15 @@ The .CSV files were first opened in MS-Excel for initial data cleaning and prepa
     
         -	The ‘start_time’ and ‘end_time’ columns were populated using the ‘=MOD ()’ function where the divisor was 1. This was custom formatted as ‘hh:mm:ss’ .
     
-        -	‘ride_length´ was calculated using the formula ‘=end_time – start_time’. This, however, resulted in hashtags in some cells. To find out the actual duration            of each ride, the following function was used:
+        -	‘ride_length´ was calculated using the formula ‘=end_time – start_time’. This, however, resulted in hashtags in some cells. To find out the actual duration of each ride, the following function was used:
                                           
                                           =IF (end_time < start_time, (1 + end_time) – start_time, end_time – start_time)
 
-        To ensure the results from this function were accurate, the results were validated using a time calculator found on the web. This was further custom                 formatted as ‘hh:mm:ss.’
+        To ensure the results from this function were accurate, the results were validated using a time calculator found on the web. This was further custom formatted as ‘hh:mm:ss.’
      
-        -	The ‘start_day_of_week’ column was populated using the ‘=WEEKDAY()’ function, where 1 = ‘Sunday’ and 7 = ‘Saturday’. The results were formatted as                   ‘General.’
+        -	The ‘start_day_of_week’ column was populated using the ‘=WEEKDAY()’ function, where 1 = ‘Sunday’ and 7 = ‘Saturday’. The results were formatted as 'General.’
 
-        -	The ‘num_of_days’ column was populated using the ‘=DAYS()’ function which calculates the difference between a start date and an end date. The results were           formatted as ‘General.’
+        -	The ‘num_of_days’ column was populated using the ‘=DAYS()’ function which calculates the difference between a start date and an end date. The results were formatted as ‘General.’
       
         -	Finally, the ‘month’ column was populated using the ‘=MONTH()’ function, where 1 = ‘January’ and 12 = ‘December’. The results were formatted as ‘General.’
 
